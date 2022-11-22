@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post "/login", to: "accounts#create_login"
 
   get "/logout", to: "accounts#logout"
+
+  root "accounts#login"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
