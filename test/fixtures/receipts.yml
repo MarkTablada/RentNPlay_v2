@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 1
+  mobile_number: 1
+  house_number: MyString
+  barangay: MyString
+  city: MyString
+  province: MyString
+  game: 1
+  rent_rate: 1
+  start_date: 2022-11-22
+  rent_duration: 1
+  end_date: 2022-11-22
+  sub_total: 1
+  payment_method: MyString
+
+two:
+  name: 1
+  mobile_number: 1
+  house_number: MyString
+  barangay: MyString
+  city: MyString
+  province: MyString
+  game: 1
+  rent_rate: 1
+  start_date: 2022-11-22
+  rent_duration: 1
+  end_date: 2022-11-22
+  sub_total: 1
+  payment_method: MyString
