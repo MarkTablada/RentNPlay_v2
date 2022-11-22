@@ -1,7 +1,7 @@
 <div id="<%= dom_id game %>">
   <p>
     <strong>Owner:</strong>
-    <%= game.owner_id %>
+    <%= Account.find(game.owner_id).username %>
   </p>
 
   <p>
