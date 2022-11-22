@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: %i[ show edit update destroy ]
   before_action :is_logged_in, except: [:login, :create_login, :logout, :create, :new]
-  before_action :is_admin, except: [:login, :create_login, :logout, :show, :create, :new]
+  before_action :is_admin, except: [:login, :create_login, :logout, :show, :create, :new, :edit]
 
   # GET /accounts or /accounts.json
   def index
@@ -66,6 +66,9 @@ class AccountsController < ApplicationController
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
+
+    session[:account_id] = @account.id
+
   end
 
   # PATCH/PUT /accounts/1 or /accounts/1.json

@@ -5,5 +5,8 @@
 <br>
 
 <div>
-  <%= link_to "Back to accounts", accounts_path %>
+  <% if session[:is_admin] == 0 then %>
+    <%= link_to "Back to accounts", accounts_path %>
+  <% end %>
+  <a href="/login"><button>Login</button></a>
 </div>

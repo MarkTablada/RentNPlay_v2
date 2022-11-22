@@ -3,8 +3,10 @@
 <%= render @game %>
 
 <div>
-  <%= link_to "Edit this game", edit_game_path(@game) %> |
-  <%= link_to "Back to games", games_path %>
+  <% if session[:account_id] == @game.owner_id || session[:is_admin] == 0 then %>
+    <%= link_to "Edit this game", edit_game_path(@game) %> |
+    <%= button_to "Destroy this game", @game, method: :delete %>
+  <% end %>
 
-  <%= button_to "Destroy this game", @game, method: :delete %>
+  <%= link_to "Back to games", games_path %>
 </div>
