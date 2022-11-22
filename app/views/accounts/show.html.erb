@@ -3,8 +3,11 @@
 <%= render @account %>
 
 <div>
-  <%= link_to "Edit this account", edit_account_path(@account) %> |
-  <%= link_to "Back to accounts", accounts_path %>
+  <a href="/accounts/<%= session[:account_id] %>/edit"><button>Edit Account</button></a> |
+  <% if session[:is_admin] == 0 then %>
+    <a href="/accounts"><button>Back to Accounts</button></a>
+    <%= button_to "Destroy this account", @account, method: :delete %>
+  <% end %>
+  <a href="/games"><button>Go to Games</button></a>
 
-  <%= button_to "Destroy this account", @account, method: :delete %>
 </div>

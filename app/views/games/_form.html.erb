@@ -12,8 +12,7 @@
   <% end %>
 
   <div>
-    <%= form.label :owner_id, style: "display: block" %>
-    <%= form.number_field :owner_id %>
+    <%= form.hidden_field :owner_id %>
   </div>
 
   <div>
@@ -75,10 +74,4 @@
     <%= form.submit %>
   </div>
 
-  <div>
-    User wants to rent the game
-    <p>
-    <a href=""><button>accept</button></a>
-    <a href=""><button>decline</button></a>
-  </div>
 <% end %>

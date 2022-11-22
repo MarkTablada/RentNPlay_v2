@@ -1,8 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
-<%= link_to "Log out", "/logout" %>
+<a href="/logout"><button>Logout</button></a>
 
-<%= link_to "Account", "/accounts/#{session[:account_id]}" %>
+<a href="/accounts/<%= session[:account_id] %>"><button>Profile</button></a>
 
 <h1> Welcome, <%= Account.find(session[:account_id]).full_name %> </h1>
 

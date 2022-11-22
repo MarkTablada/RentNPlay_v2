@@ -4,6 +4,8 @@ class Account < ApplicationRecord
   validates :user_type, numericality: true
 
   validates :username, uniqueness: true
+  
+  validates :password, length: {minimum: 6}
 
   validates :password_confirmation, presence: true
 
