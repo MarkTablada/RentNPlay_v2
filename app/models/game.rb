@@ -10,6 +10,8 @@ class Game < ApplicationRecord
 
     validates :genre, presence: true
 
+    validates :maturity_rating, presence: true
+
     validates :platform, presence: true
 
     validates :rent_rate, numericality: {only_integers: true}
