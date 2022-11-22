@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @request %>
+
+<div>
+  <%= link_to "Respond to Request", edit_request_path(@request) %> |
+  <%= link_to "Back", "/games/#{@request.game_id}" %>
+
+  <% if Request.find(params[:id]).user_id == session[:account_id] %>
+    <%= button_to "Cancel Request", @request, method: :delete %>
+  <% end %>
+</div>

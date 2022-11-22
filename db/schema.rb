@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_22_075046) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_22_103207) do
   create_table "accounts", force: :cascade do |t|
     t.integer "user_type"
     t.string "username"
@@ -52,6 +52,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_075046) do
     t.date "end_date"
     t.integer "sub_total"
     t.string "payment_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "user_id"
+    t.string "status"
+    t.integer "rent_duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

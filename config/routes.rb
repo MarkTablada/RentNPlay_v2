@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :requests
   resources :receipts
   resources :accounts
   resources :games

@@ -1,0 +1,20 @@
+<div id="<%= dom_id request %>">
+
+  <% if session[:account_id] == Game.find(request.game_id).owner_id %>
+    <p>
+      <strong>User:</strong>
+      <%= Account.find(request.user_id).full_name %>
+    </p>
+  <% end %>
+
+  <p>
+    <strong>Status:</strong>
+    <%= request.status %>
+  </p>
+
+  <p>
+    <strong>Rent duration:</strong>
+    <%= request.rent_duration %>
+  </p>
+
+</div>

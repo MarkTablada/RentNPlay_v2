@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Requests</h1>
+
+<div id="requests">
+  <% @requests.each do |request| %>
+    <% if session[:account_id] == request.user_id || session[:account_id] == Game.find(request.game_id).owner_id %>  
+      <%= render request %>
+      <p>
+        <%= link_to "Show this request", request %>
+      </p>
+    <% end %>
+  <% end %>
+</div>
+
