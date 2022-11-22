@@ -2,6 +2,8 @@ class GamesController < ApplicationController
   before_action :set_game, only: %i[ show edit update destroy ]
   before_action :is_logged_in
   before_action :is_admin, only: [:destroy]
+  before_action :is_owner, only: [:destroy, :update, :edit]
+
 
   # GET /games or /games.json
   def index
@@ -11,6 +13,14 @@ class GamesController < ApplicationController
   # GET /games/1 or /games/1.json
   def show
   end
+
+  
+def is_owner
+	if session[:account_id] != @game.owner_id
+		redirect_to "/games", notice: "Action is forbidden" 
+	end
+end
+
 
   # GET /games/new
   def new
