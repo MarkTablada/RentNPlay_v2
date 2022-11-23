@@ -20,10 +20,9 @@
   </div>
  
   <div>         
-    <%= form.label :status, style: "display: block" %>
     <p>
-    <%= form.radio_button :status, 'Pending', checked: true %> Pending
     <% if session[:account_id] == @game %>
+      <%= form.label :status, style: "display: block" %>    
       <%= form.radio_button :status, 'Rejected' %> Rejected
       <%= form.radio_button :status, 'Accepted' %> Accepted
     <% end %>

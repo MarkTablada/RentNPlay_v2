@@ -1,12 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
+<% if Request.find(params[:id]).user_id != session[:account_id] %>
+  <h1><%= Account.find(Request.find(params[:id]).user_id).full_name %> Requests to Rent <%= Game.find(Request.find(params[:id]).game_id).name %></h1>
+<% else %>
+  <h1>You requested to Rent <%= Game.find(Request.find(params[:id]).game_id).name %></h1>
+<% end %>
+
 <%= render @request %>
 
 <div>
-  <%= link_to "Respond to Request", edit_request_path(@request) %> |
+  <% if Request.find(params[:id]).user_id != session[:account_id] %>
+    <%= link_to "Respond to Request", edit_request_path(@request) %> |
+  <% end %>
+
   <%= link_to "Back", "/games/#{@request.game_id}" %>
 
-  <% if Request.find(params[:id]).user_id == session[:account_id] %>
+  <% if Request.find(params[:id]).user_id == session[:account_id] && Request.find(params[:id]).status != "Accepted" %>
     <%= button_to "Cancel Request", @request, method: :delete %>
   <% end %>
 </div>
