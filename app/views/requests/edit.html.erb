@@ -2,6 +2,11 @@
 
 <%= render "form", request: @request %>
 
+<div>
+  #<a href="/accept"> <button> accept </button> </a>
+  <%= button_to "accept", @request, method: :accept %>
+</div>    
+
 <br>
 
 <div>

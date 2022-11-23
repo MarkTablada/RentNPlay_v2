@@ -10,7 +10,7 @@
 
 <div>
   <% if Request.find(params[:id]).user_id != session[:account_id] %>
-    <%= link_to "Respond to Request", edit_request_path(@request) %> |
+    <%= link_to "Respond to Request", "/respond" %> |
   <% end %>
 
   <%= link_to "Back", "/games/#{@request.game_id}" %>

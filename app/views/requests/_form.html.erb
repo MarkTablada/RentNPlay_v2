@@ -17,16 +17,7 @@
 
   <div>
     <%= form.hidden_field :user_id %>
-  </div>
- 
-  <div>         
-    <p>
-    <% if session[:account_id] == @game %>
-      <%= form.label :status, style: "display: block" %>    
-      <%= form.radio_button :status, 'Rejected' %> Rejected
-      <%= form.radio_button :status, 'Accepted' %> Accepted
-    <% end %>
-  </div>
+  </div>  
 
   <div>
     <% if session[:account_id] != @game %>
