@@ -12,6 +12,8 @@
 
   <%= render 'requests/index', requests: @requests %>
 
-  <%= render 'requests/new', new_request: Request.new(:game_id => @game.id ) %>
+  <% if Game.find(params[:id]).owner_id != session[:account_id] %>
+    <%= render 'requests/new', new_request: Request.new(:game_id => @game.id ) %>
+  <% end %>
 
 </div>

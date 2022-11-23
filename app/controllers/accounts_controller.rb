@@ -2,10 +2,19 @@ class AccountsController < ApplicationController
   before_action :set_account, only: %i[ show edit update destroy ]
   before_action :is_logged_in, except: [:login, :create_login, :logout, :create, :new]
   before_action :is_admin, except: [:login, :create_login, :logout, :show, :create, :new, :edit]
-
+  before_action :is_account_owner, only: [:show, :edit, :update, :destroy]
+  
   # GET /accounts or /accounts.json
   def index
     @accounts = Account.all
+  end
+
+  def is_account_owner
+    if session[:account_id] != @account.id 
+      if session[:is_admin] != 0
+        redirect_to "/games", notice: "Action is forbidden" 
+      end
+    end
   end
 
   def login
@@ -21,12 +30,6 @@ class AccountsController < ApplicationController
 			redirect_to "/games", notice: "success"
 		else
 			redirect_to "/login", notice: "Login Failed"
-		end
-	end
-
-  def encrypt_password
-		if params[:password_confirmation] != params[:password_digest]
-			errors.add(:password_confirmation, "Password confirmation doesn't match your password. Please wag bobo ") 
 		end
 	end
 

@@ -28,6 +28,8 @@ class RequestsController < ApplicationController
 
     @request.user_id = session[:account_id]
 
+    @request.status = "Pending"
+
     respond_to do |format|
       if @request.save
         format.html { redirect_to request_url(@request), notice: "Request was successfully created." }
@@ -41,6 +43,9 @@ class RequestsController < ApplicationController
 
   # PATCH/PUT /requests/1 or /requests/1.json
   def update
+
+    
+
     respond_to do |format|
       if @request.update(request_params)
         format.html { redirect_to "/games/#{@request.game_id}", notice: "Request was successfully updated." }

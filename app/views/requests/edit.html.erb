@@ -1,4 +1,4 @@
-<h1>Editing request</h1>
+<h1><%= Account.find(Request.find(params[:id]).user_id).full_name %> Requests to Rent <%= Game.find(Request.find(params[:id]).game_id).name %></h1>
 
 <%= render "form", request: @request %>
 

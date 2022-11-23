@@ -5,9 +5,22 @@
 <div id="requests">
   <% @requests.each do |request| %>
     <% if session[:account_id] == request.user_id || session[:account_id] == Game.find(request.game_id).owner_id %>  
+    
+      <% if request.status == "Accepted" %>
+        <h5>NOTICE: This request has been ACCEPTED</h5>
+        <h5>Proceed to the payment form by showing this request</h5>
+      <% elsif request.status == "Rejected" %>
+        <h5>NOTICE: This request has been REJECTED and is safe to CANCEL</h5>
+      <% end %>
+
       <%= render request %>
       <p>
         <%= link_to "Show this request", request %>
+
+        <% if session[:account_id] != Game.find(request.game_id).owner_id && request.status != "Accepted" %>
+          <%= button_to "Cancel Request", request, method: :delete %>
+        <% end %>
+
       </p>
     <% end %>
   <% end %>
