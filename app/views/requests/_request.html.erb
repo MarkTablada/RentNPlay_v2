@@ -3,7 +3,7 @@
   <% if session[:account_id] == Game.find(request.game_id).owner_id %>
     <p>
       <strong>User:</strong>
-      <%= Account.find(request.user_id).full_name %>
+       <%= Account.find(request.user_id).full_name %>
     </p>
   <% end %>
 
@@ -13,7 +13,7 @@
   </p>
 
   <p>
-    <strong>Rent duration:</strong>
+    <strong>Rent duration(in week/s):</strong>
     <%= request.rent_duration %>
   </p>
 

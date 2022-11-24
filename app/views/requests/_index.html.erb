@@ -17,7 +17,7 @@
       <p>
         <%= link_to "Show this request", request %>
 
-        <% if session[:account_id] != Game.find(request.game_id).owner_id && request.status != "Accepted" %>
+        <% if session[:account_id] != Game.find(request.game_id).owner_id && request.status != "accepted" %>
           <%= button_to "Cancel Request", request, method: :delete %>
         <% end %>
 

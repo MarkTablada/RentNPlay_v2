@@ -23,6 +23,11 @@ class ReceiptsController < ApplicationController
   def create
     @receipt = Receipt.new(receipt_params)
 
+
+    @receipt.start_date = Date.current
+    @receipt.end_date = @receipt.start_date + (@receipt.rent_duration * 7)
+    @receipt.sub_total = @receipt.rent_rate * @receipt.rent_duration
+
     respond_to do |format|
       if @receipt.save
         format.html { redirect_to receipt_url(@receipt), notice: "Receipt was successfully created." }
@@ -65,6 +70,6 @@ class ReceiptsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def receipt_params
-      params.require(:receipt).permit(:name, :mobile_number, :house_number, :barangay, :city, :province, :game, :rent_rate, :start_date, :rent_duration, :end_date, :sub_total, :payment_method)
+      params.require(:receipt).permit(:name, :mobile_number, :house_number, :barangay, :city, :province, :game, :rent_rate, :start_date, :rent_duration, :end_date, :sub_total, :payment_method, :request_id, :receiver_name)
     end
 end

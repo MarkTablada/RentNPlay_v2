@@ -41,6 +41,32 @@ class RequestsController < ApplicationController
     end
   end
 
+<<<<<<< Updated upstream
+=======
+  def respond
+  end
+
+  def accept
+    @request = Request.find(session[:current_request])
+    
+    @request.status = "accepted"
+    
+    session[:current_request] = nil
+    @request.save
+    redirect_to "/requests/#{@request.id}"
+  end
+
+  def reject
+    @request = Request.find(session[:current_request])
+    
+    @request.status = "rejected"
+    
+    session[:current_request] = nil
+    @request.save
+    redirect_to "/requests/#{@request.id}"
+  end
+
+>>>>>>> Stashed changes
   # PATCH/PUT /requests/1 or /requests/1.json
   def update
 

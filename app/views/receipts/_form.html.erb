@@ -12,9 +12,17 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.number_field :name %>
+    <%= form.hidden_field :name %>
   </div>
+
+  <div>
+    <%= form.hidden_field :request_id %>
+  </div>
+
+  <div>
+  <%= form.label :receiver_name, style: "display: block" %>
+  <%= form.text_field :receiver_name %>
+</div>
 
   <div>
     <%= form.label :mobile_number, style: "display: block" %>
@@ -42,13 +50,13 @@
   </div>
 
   <div>
-    <%= form.label :game, style: "display: block" %>
-    <%= form.number_field :game %>
+    Game: <p> <%= Game.find(receipt.game).name %>
+    <%= form.hidden_field :game %>
   </div>
 
   <div>
-    <%= form.label :rent_rate, style: "display: block" %>
-    <%= form.number_field :rent_rate %>
+    Rent Rate(per week): <p> <%= Game.find(receipt.game).rent_rate %>
+    <%= form.hidden_field :rent_rate %>
   </div>
 
   <div>
@@ -57,7 +65,7 @@
   </div>
 
   <div>
-    <%= form.label :rent_duration, style: "display: block" %>
+    Rent Duration(in week/s) <p>
     <%= form.number_field :rent_duration %>
   </div>
 
@@ -67,13 +75,12 @@
   </div>
 
   <div>
-    <%= form.label :sub_total, style: "display: block" %>
-    <%= form.number_field :sub_total %>
+    <%= form.hidden_field :sub_total %>
   </div>
 
   <div>
     <%= form.label :payment_method, style: "display: block" %>
-    <%= form.text_field :payment_method %>
+    <%= form.radio_button :payment_method, 'Gcash', :checked => true%> Gcash
   </div>
 
   <div>
