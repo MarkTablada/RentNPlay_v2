@@ -50,32 +50,33 @@
   </div>
 
   <div>
-    Game: <p> <%= Game.find(receipt.game).name %>
+    Game: <%= Game.find(receipt[:game]).name %>
     <%= form.hidden_field :game %>
   </div>
 
   <div>
-    Rent Rate(per week): <p> <%= Game.find(receipt.game).rent_rate %>
+    Rent Rate(per week): <%= receipt[:rent_rate] %>
     <%= form.hidden_field :rent_rate %>
   </div>
 
   <div>
-    <%= form.label :start_date, style: "display: block" %>
-    <%= form.date_field :start_date %>
+    Rent Duration(in week/s): <%= receipt[:rent_duration] %>
+    <%= form.hidden_field :rent_duration %>
   </div>
 
   <div>
-    Rent Duration(in week/s) <p>
-    <%= form.number_field :rent_duration %>
-  </div>
-
-  <div>
-    <%= form.label :end_date, style: "display: block" %>
-    <%= form.date_field :end_date %>
-  </div>
-
-  <div>
+    Sub total: <%= receipt[:sub_total] %>
     <%= form.hidden_field :sub_total %>
+  </div>
+
+  <div>
+    Start date: <%= receipt[:start_date] %>
+    <%= form.hidden_field :start_date %>
+  </div>
+
+  <div>
+    End date: <%= receipt[:end_date] %>
+    <%= form.hidden_field :end_date %>
   </div>
 
   <div>

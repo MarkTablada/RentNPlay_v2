@@ -9,13 +9,8 @@
 <%= render @request %>
 
 <div>
-<<<<<<< Updated upstream
-  <% if Request.find(params[:id]).user_id != session[:account_id] %>
-    <%= link_to "Respond to Request", edit_request_path(@request) %> |
-=======
   <% if Request.find(params[:id]).user_id != session[:account_id] && Request.find(params[:id]).status != "accepted"  %>
     <%= link_to "Respond to Request", "/respond" %> |
->>>>>>> Stashed changes
   <% end %>
 
   <%= link_to "Back", "/games/#{@request.game_id}" %>
@@ -25,6 +20,12 @@
   <% end %>
 </div>
 
+<% @end_date = Date.current + (Game.find(@request.game_id).rent_rate * 7) %>
+<% @sub_total = Game.find(@request.game_id).rent_rate * @request.rent_duration %>
+<%= @end_date %>
+<%= @sub_total %>
+
 <% if Game.find(Request.find(params[:id]).game_id).owner_id != session[:account_id] && Request.find(params[:id]).status == "accepted"%>
-  <%= render 'receipts/new', new_receipts: Receipt.new(:request_id => @request.id, :name => @request.user_id, :game => @request.game_id, :rent_rate => Game.find(@request.game_id).rent_rate, :start_date => Date.current) %>
+  <%= render 'receipts/new', new_receipts: Receipt.new(:request_id => @request.id, :name => @request.user_id, :game => @request.game_id, :rent_rate => Game.find(@request.game_id).rent_rate, :start_date => Date.current, :rent_duration => @request.rent_duration, :end_date => Date.current + (Game.find(@request.game_id).rent_rate * 7), :sub_total => (Game.find(@request.game_id).rent_rate * @request.rent_duration))%>
 <% end %>
+
