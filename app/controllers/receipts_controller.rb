@@ -38,7 +38,7 @@ class ReceiptsController < ApplicationController
 
       redirect_to "/requests/#{session[:request_id]}"
   end
-
+  
   # POST /receipts or /receipts.json
   def create
 
