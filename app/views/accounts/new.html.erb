@@ -1,12 +1,15 @@
-<h1>New account</h1>
+<%= stylesheet_link_tag "login"%>
 
-<%= render "form", account: @account %>
-
-<br>
-
-<div>
-  <% if session[:is_admin] == 0 then %>
-    <%= link_to "Back to accounts", accounts_path %>
-  <% end %>
-  <a href="/login"><button>Login</button></a>
+<div class="modal fade show" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: block;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Sign up</h1>
+        <a type="button" class="btn-close" href="/login" aria-label="Close"></a>
+      </div>
+      <div class="modal-body">
+        <%= render "form", account: @account %>
+      </div>
+    </div>
+  </div>
 </div>

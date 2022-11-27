@@ -1,7 +1,4 @@
 
-
-
-<!-- ================================================================================ -->
 <%= stylesheet_link_tag "login"%>
 
 <%= notice %>
@@ -34,7 +31,24 @@
 
 	<br>
 
-	<a href="/accounts/new">  <button class= "w-100 btn btn-lg btn-success"> Register </button> </a>
+	<div class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display: none;">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Sign up</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <%= render "form", account: @account %>
+	    	</div>
+	  	</div>
+		</div>
+	</div>
+
+	<button type="button" class="w-100 btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
+    Register
+  </button>
+
 	<p class="mt-5 mb-3 text-muted">©2022</p>
-	
+
 </main>
