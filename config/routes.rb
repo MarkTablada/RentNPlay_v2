@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
   post "/reject", to: "requests#reject"
   get "/reject", to: "requests#reject"
+
+  get "/link_and_return", to: "receipts#link_and_return"
+  post "/link_and_return", to: "receipts#link_and_return"
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

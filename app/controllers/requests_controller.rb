@@ -9,6 +9,7 @@ class RequestsController < ApplicationController
 
   # GET /requests/1 or /requests/1.json
   def show
+    @receipt = Receipt.all
   end
 
   # GET /requests/new
@@ -104,6 +105,6 @@ class RequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def request_params
-      params.require(:request).permit(:game_id, :user_id, :status, :rent_duration)
+      params.require(:request).permit(:game_id, :user_id, :status, :rent_duration, :receipt_id, :receipt_status)
     end
 end

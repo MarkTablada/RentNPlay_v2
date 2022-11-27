@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_23_095625) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_25_041517) do
   create_table "accounts", force: :cascade do |t|
     t.integer "user_type"
     t.string "username"
@@ -65,6 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_095625) do
     t.integer "rent_duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "receipt_id"
+    t.string "receipt_status"
   end
 
 end
