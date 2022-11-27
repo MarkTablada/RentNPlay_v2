@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[ show edit update destroy ]
+  before_action :get_id, only: [:show]
 
   # GET /requests or /requests.json
   def index
@@ -8,6 +9,7 @@ class RequestsController < ApplicationController
 
   # GET /requests/1 or /requests/1.json
   def show
+    @receipt = Receipt.all
   end
 
   # GET /requests/new
@@ -41,8 +43,10 @@ class RequestsController < ApplicationController
     end
   end
 
-<<<<<<< Updated upstream
-=======
+  def get_id
+    session[:current_request] = @request.id
+  end
+
   def respond
   end
 
@@ -66,7 +70,6 @@ class RequestsController < ApplicationController
     redirect_to "/requests/#{@request.id}"
   end
 
->>>>>>> Stashed changes
   # PATCH/PUT /requests/1 or /requests/1.json
   def update
 
@@ -102,6 +105,6 @@ class RequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def request_params
-      params.require(:request).permit(:game_id, :user_id, :status, :rent_duration)
+      params.require(:request).permit(:game_id, :user_id, :status, :rent_duration, :receipt_id, :receipt_status)
     end
 end

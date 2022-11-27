@@ -1,5 +1,6 @@
 class ReceiptsController < ApplicationController
   before_action :set_receipt, only: %i[ show edit update destroy ]
+  after_action :delete_session, only: [:link_and_return]
 
   # GET /receipts or /receipts.json
   def index
@@ -8,6 +9,7 @@ class ReceiptsController < ApplicationController
 
   # GET /receipts/1 or /receipts/1.json
   def show
+      session[:receipt_id] = @receipt.id
   end
 
   # GET /receipts/new
@@ -19,14 +21,36 @@ class ReceiptsController < ApplicationController
   def edit
   end
 
+  def calculate
+    @receipt
+  end
+
+  def delete_session
+    session[:request_id] = nil 
+    session[:receipt_id] = nil
+  end
+
+  def link_and_return
+      @request = Request.find(session[:request_id])
+      @request.receipt_id = session[:receipt_id]
+
+      @request.save
+
+      redirect_to "/requests/#{session[:request_id]}"
+  end
+
   # POST /receipts or /receipts.json
   def create
+
     @receipt = Receipt.new(receipt_params)
 
+    @request = Request.find(@receipt.request_id)
 
-    @receipt.start_date = Date.current
-    @receipt.end_date = @receipt.start_date + (@receipt.rent_duration * 7)
-    @receipt.sub_total = @receipt.rent_rate * @receipt.rent_duration
+    session[:request_id] = @receipt.request_id
+
+    @request.receipt_status = "Completed"
+
+    @request.save
 
     respond_to do |format|
       if @receipt.save
