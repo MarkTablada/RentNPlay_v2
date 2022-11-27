@@ -19,14 +19,13 @@ class ReceiptsController < ApplicationController
   def edit
   end
 
+  def calculate
+    @receipt
+  end
+
   # POST /receipts or /receipts.json
   def create
     @receipt = Receipt.new(receipt_params)
-
-
-    @receipt.start_date = Date.current
-    @receipt.end_date = @receipt.start_date + (@receipt.rent_duration * 7)
-    @receipt.sub_total = @receipt.rent_rate * @receipt.rent_duration
 
     respond_to do |format|
       if @receipt.save

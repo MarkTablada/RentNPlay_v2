@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[ show edit update destroy ]
+  before_action :get_id, only: [:show]
 
   # GET /requests or /requests.json
   def index
@@ -41,8 +42,10 @@ class RequestsController < ApplicationController
     end
   end
 
-<<<<<<< Updated upstream
-=======
+  def get_id
+    session[:current_request] = @request.id
+  end
+
   def respond
   end
 
@@ -66,7 +69,6 @@ class RequestsController < ApplicationController
     redirect_to "/requests/#{@request.id}"
   end
 
->>>>>>> Stashed changes
   # PATCH/PUT /requests/1 or /requests/1.json
   def update
 
