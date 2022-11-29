@@ -1,28 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Requests</h1>
-
-<div id="requests">
+<div id="requests" class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 100%;">
   <% @requests.each do |request| %>
-    <% if session[:account_id] == request.user_id || session[:account_id] == Game.find(request.game_id).owner_id %>  
-    
-      <% if request.status == "accepted" %>
-        <h5>NOTICE: This request has been ACCEPTED</h5>
-        <h5>Proceed to the payment form by showing this request</h5>
-      <% elsif request.status == "rejected" %>
-        <h5>NOTICE: This request has been REJECTED and is safe to CANCEL</h5>
-      <% end %>
+    <% if session[:account_id] == request.user_id || session[:account_id] == Game.find(request.game_id).owner_id %>
+      <div class="list-group list-group-flush border-bottom scrollarea">
 
-      <%= render request %>
-      <p>
-        <%= link_to "Show this request", request %>
+        <a href="/requests/<%=request.id%>" class="list-group-item list-group-item-action py-3 lh-sm">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="d-flex attr_writer :attr_names-100 align-items-center justify-content-between">
+                <div id="<%= dom_id request %>">
+                  <% if session[:account_id] == Game.find(request.game_id).owner_id %>
+                      <strong class="mb-1"><%= Account.find(request.user_id).full_name %></strong>
+                      <small class="text-muted "><%= request.status %></small>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-10 mb-1 small pt-3 justify-content-between">
+                <p>rent duration(week/s): <%= request.rent_duration %> </p>
+              </div>
+            </div>
+          </div>
+        </a>
 
-        <% if session[:account_id] != Game.find(request.game_id).owner_id && request.status != "accepted" %>
-          <%= button_to "Cancel Request", request, method: :delete %>
+        </div>
+
         <% end %>
-
-      </p>
-    <% end %>
+      </div>
   <% end %>
-</div>
-
