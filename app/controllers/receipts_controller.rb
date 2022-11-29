@@ -26,7 +26,7 @@ class ReceiptsController < ApplicationController
   end
 
   def delete_session
-    session[:request_id] = nil 
+    session[:request_id] = nil
     session[:receipt_id] = nil
   end
 
@@ -38,7 +38,7 @@ class ReceiptsController < ApplicationController
 
       redirect_to "/requests/#{session[:request_id]}"
   end
-  
+
   # POST /receipts or /receipts.json
   def create
 
@@ -85,6 +85,7 @@ class ReceiptsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

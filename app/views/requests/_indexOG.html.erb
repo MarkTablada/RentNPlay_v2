@@ -1,0 +1,45 @@
+<p style="color: green"><%= notice %></p>
+
+<div id="requests">
+  <% @requests.each do |request| %>
+    <% if session[:account_id] == request.user_id || session[:account_id] == Game.find(request.game_id).owner_id %>
+
+      <div id="<%= dom_id request %>">
+
+        <% if session[:account_id] == Game.find(request.game_id).owner_id %>
+          <p>
+            <strong>User:</strong>
+             <%= Account.find(request.user_id).full_name %>
+          </p>
+        <% end %>
+
+        <p>
+          <strong>Status:</strong>
+          <%= request.status %>
+        </p>
+
+        <p>
+          <strong>Rent duration(in week/s):</strong>
+          <%= request.rent_duration %>
+        </p>
+
+        <% if request.status == "accepted" %>
+          <p>NOTICE: This request has been ACCEPTED</p>
+          <p>Proceed to the payment form by showing this request</p>
+        <% elsif request.status == "rejected" %>
+          <p>NOTICE: This request has been REJECTED and is safe to CANCEL</p>
+        <% end %>
+        
+      </div>
+
+      <p>
+        <%= link_to "Show this request", request %>
+
+        <% if session[:account_id] != Game.find(request.game_id).owner_id && request.status != "accepted" %>
+          <%= button_to "Cancel Request", request, method: :delete %>
+        <% end %>
+
+      </p>
+    <% end %>
+  <% end %>
+</div>

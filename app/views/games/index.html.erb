@@ -1,20 +1,19 @@
-<p style="color: green"><%= notice %></p>
+<%= render "/layouts/header" %>
 
-<a href="/logout"><button>Logout</button></a>
 
-<a href="/accounts/<%= session[:account_id] %>"><button>Profile</button></a>
-
-<h1> Welcome, <%= Account.find(session[:account_id]).full_name %> </h1>
-
-<h1>Games</h1>
-
-<div id="games">
-  <% @games.each do |game| %>
-    <%= render game %>
-    <p>
-      <%= link_to "Show this game", game %>
-    </p>
+<div class="container">
+  <% if notice %>
+    <div class="position-relative alert alert-warning alert-dismissible fade show text-left" role="alert">
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   <% end %>
-</div>
+  
+  <div id="games" class="row row-cols-1 row-cols-md-3 g-4">
 
-<%= link_to "New game", new_game_path %>
+    <% @games.each do |game| %>
+      <%= render game %>
+    <% end %>
+
+  </div>
+</div>

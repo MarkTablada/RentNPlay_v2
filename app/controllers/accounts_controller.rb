@@ -3,21 +3,22 @@ class AccountsController < ApplicationController
   before_action :is_logged_in, except: [:login, :create_login, :logout, :create, :new]
   before_action :is_admin, except: [:login, :create_login, :logout, :show, :create, :new, :edit]
   before_action :is_account_owner, only: [:show, :edit, :update, :destroy]
-  
+
   # GET /accounts or /accounts.json
   def index
     @accounts = Account.all
   end
 
   def is_account_owner
-    if session[:account_id] != @account.id 
+    if session[:account_id] != @account.id
       if session[:is_admin] != 0
-        redirect_to "/games", notice: "Action is forbidden" 
+        redirect_to "/games", notice: "Action is forbidden"
       end
     end
   end
 
   def login
+    @account = Account.new
   end
 
   def create_login
@@ -27,7 +28,7 @@ class AccountsController < ApplicationController
 			session[:account_id] = account.id
 			session[:is_admin] = account.user_type
 
-			redirect_to "/games", notice: "success"
+			redirect_to "/games"
 		else
 			redirect_to "/login", notice: "Login Failed"
 		end
