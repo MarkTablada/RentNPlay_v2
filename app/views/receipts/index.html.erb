@@ -4,11 +4,12 @@
 
 <div id="receipts">
   <% @receipts.each do |receipt| %>
-    <%= render receipt %>
-    <p>
-      <%= link_to "Show this receipt", receipt %>
-    </p>
+	<% if receipt.name == session[:account_id] %>
+   		 <%= render receipt %>
+    		 <p>
+     			 <%= link_to "Show this receipt", receipt %>
+   		 </p>
+	<% end %>
   <% end %>
 </div>
 
-<%= link_to "New receipt", new_receipt_path %>

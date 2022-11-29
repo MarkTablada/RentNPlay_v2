@@ -30,7 +30,7 @@
 
   <div>
     <% if session[:account_id] != @game %>
-      <%= form.label :rent_duration, style: "display: block" %>
+      Rent Duration(in week/s) <p>
       <%= form.number_field :rent_duration %>
     <% end %>
   </div>

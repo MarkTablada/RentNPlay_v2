@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[ show edit update destroy ]
+  before_action :get_id, only: [:show]
 
   # GET /requests or /requests.json
   def index
@@ -8,6 +9,7 @@ class RequestsController < ApplicationController
 
   # GET /requests/1 or /requests/1.json
   def show
+    @receipt = Receipt.all
   end
 
   # GET /requests/new
@@ -39,6 +41,33 @@ class RequestsController < ApplicationController
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def get_id
+    session[:current_request] = @request.id
+  end
+
+  def respond
+  end
+
+  def accept
+    @request = Request.find(session[:current_request])
+    
+    @request.status = "accepted"
+    
+    session[:current_request] = nil
+    @request.save
+    redirect_to "/requests/#{@request.id}"
+  end
+
+  def reject
+    @request = Request.find(session[:current_request])
+    
+    @request.status = "rejected"
+    
+    session[:current_request] = nil
+    @request.save
+    redirect_to "/requests/#{@request.id}"
   end
 
   # PATCH/PUT /requests/1 or /requests/1.json
@@ -76,6 +105,6 @@ class RequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def request_params
-      params.require(:request).permit(:game_id, :user_id, :status, :rent_duration)
+      params.require(:request).permit(:game_id, :user_id, :status, :rent_duration, :receipt_id, :receipt_status)
     end
 end

@@ -5,6 +5,10 @@
 <div>
   <%= link_to "Edit this receipt", edit_receipt_path(@receipt) %> |
   <%= link_to "Back to receipts", receipts_path %>
+  
+  <a href="/requests/<%=@receipt.request_id%>"> <button> Back </button> </a>
+
+  <a href="/link_and_return"><button>Save Receipt</button></a>
 
   <%= button_to "Destroy this receipt", @receipt, method: :delete %>
 </div>
