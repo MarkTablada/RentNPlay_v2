@@ -28,7 +28,7 @@ class AccountsController < ApplicationController
 			session[:account_id] = account.id
 			session[:is_admin] = account.user_type
 
-			redirect_to "/games", notice: "success"
+			redirect_to "/games"
 		else
 			redirect_to "/login", notice: "Login Failed"
 		end

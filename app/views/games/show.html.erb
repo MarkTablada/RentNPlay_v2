@@ -1,19 +1,4 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @game %>
-
-<div>
-  <% if session[:account_id] == @game.owner_id || session[:is_admin] == 0 then %>
-    <%= link_to "Edit this game", edit_game_path(@game) %> |
-    <%= button_to "Destroy this game", @game, method: :delete %>
-  <% end %>
-
-  <%= link_to "Back to games", games_path %>
-
-  <%= render 'requests/index', requests: @requests %>
-
-  <% if Game.find(params[:id]).owner_id != session[:account_id] %>
-    <%= render 'requests/new', new_request: Request.new(:game_id => @game.id ) %>
-  <% end %>
-
-</div>
+<%= render "layouts/header" %>
+<%= render "showGame" %>
