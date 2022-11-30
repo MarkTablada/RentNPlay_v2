@@ -3,30 +3,26 @@
 <div class="container ">
   <p style="color: green"><%= notice %></p>
 
-  <div class="card w-50">
-    <small class="card-header text-muted"><%= @request.created_at %></small>
-    <div class="card-body">
-      <% if Request.find(params[:id]).user_id != session[:account_id] %>
-        <h5><%= Account.find(Request.find(params[:id]).user_id).full_name %> requests to rent <%= Game.find(Request.find(params[:id]).game_id).name %></h5>
-      <% else %>
-        <h5 class="mb-3">You requested to rent <%= Game.find(Request.find(params[:id]).game_id).name %></h5>
-      <% end %>
-      <%= render @request %>
-      <% if Request.find(params[:id]).user_id == session[:account_id] && Request.find(params[:id]).status != "accepted" %>
-        <%= button_to "Cancel Request", @request, method: :delete, class: "btn btn-danger"%>
-      <% end %>
-    </div>
-  </div>
 
-  <br>
+  <% if Request.find(params[:id]).user_id != session[:account_id] %>
+    <h1><%= Account.find(Request.find(params[:id]).user_id).full_name %> Requests to Rent <%= Game.find(Request.find(params[:id]).game_id).name %></h1>
+  <% else %>
+    <h1>You requested to Rent <%= Game.find(Request.find(params[:id]).game_id).name %></h1>
+  <% end %>
+  <small class="text-muted"><%= @request.created_at %></small>
+
+  <%= render @request %>
 
   <div>
     <% if Request.find(params[:id]).user_id != session[:account_id] && Request.find(params[:id]).status != "accepted"  %>
       <%= link_to "Respond to Request", "/respond" %> |
     <% end %>
 
-    <%= link_to "Back", "/games/#{@request.game_id}", class: "btn btn-secondary" %>
+    <%= link_to "Back", "/games/#{@request.game_id}" %>
 
+    <% if Request.find(params[:id]).user_id == session[:account_id] && Request.find(params[:id]).status != "accepted" %>
+      <%= button_to "Cancel Request", @request, method: :delete %>
+    <% end %>
   </div>
   <% if Game.find(Request.find(params[:id]).game_id).owner_id != session[:account_id] && Request.find(params[:id]).status == "accepted" && Request.find(params[:id]).receipt_status != "Completed" %>
     <%= render 'receipts/new', new_receipts: Receipt.new(:request_id => @request.id, :name => @request.user_id, :game => @request.game_id, :rent_rate => Game.find(@request.game_id).rent_rate, :start_date => Date.current, :rent_duration => @request.rent_duration, :end_date => Date.current + (Game.find(@request.game_id).rent_rate * 7), :sub_total => (Game.find(@request.game_id).rent_rate * @request.rent_duration))%>
