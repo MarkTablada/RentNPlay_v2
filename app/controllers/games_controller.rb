@@ -10,6 +10,7 @@ class GamesController < ApplicationController
     @games = Game.all
   end
 
+  
   # GET /games/1 or /games/1.json
   def show
     @requests = Request.where(game_id: params[:id])
