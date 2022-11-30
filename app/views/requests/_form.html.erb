@@ -18,11 +18,11 @@
   <div>
     <%= form.hidden_field :user_id %>
   </div>
- 
-  <div>         
+
+  <div>
     <p>
     <% if session[:account_id] == @game %>
-      <%= form.label :status, style: "display: block" %>    
+      <%= form.label :status, style: "display: block" %>
       <%= form.radio_button :status, 'Rejected' %> Rejected
       <%= form.radio_button :status, 'Accepted' %> Accepted
     <% end %>
@@ -30,12 +30,15 @@
 
   <div>
     <% if session[:account_id] != @game %>
-      Rent Duration(in week/s) <p>
+      <p> Rent Duration (week/s) </p>
       <%= form.number_field :rent_duration %>
     <% end %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <br>
+
+  <div class="modal-footer">
+    <%= form.submit class: "btn btn-warning"%>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
   </div>
 <% end %>
