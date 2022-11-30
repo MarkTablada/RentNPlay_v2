@@ -6,23 +6,33 @@
     <div class="col-md-auto">
       <%= button_to "Delete", @game, method: :delete, class: "btn btn-danger"%>
     </div>
-    <div class="col-md-auto">
-      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLg">View Requests</button>
-      <!-- request modal -->
-      <div class="modal fade" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-4" id="exampleModalLgLabel">Requests</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <%= render 'requests/index', requests: @requests %>
-            </div>
+  <% end %>
+  <div class="col-md-auto">
+    <div class="row">
+      <div class="col-md-auto">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLg">View Requests</button>
+      </div>
+      <div class="col-md-auto">
+        <% if Game.find(params[:id]).owner_id != session[:account_id] %>
+          <%= render 'requests/new', new_request: Request.new(:game_id => @game.id ) %>
+        <% end %>
+      </div>
+    </div>
+    <!-- request modal -->
+    <div class="modal fade" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-4" id="exampleModalLgLabel">Requests</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= render 'requests/index', requests: @requests %>
           </div>
         </div>
       </div>
-
     </div>
-  <% end %>
+  </div>
 </div>
+
+<br>

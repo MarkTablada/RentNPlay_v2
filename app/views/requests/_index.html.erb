@@ -12,12 +12,24 @@
                 <div id="<%= dom_id request %>">
                   <% if session[:account_id] == Game.find(request.game_id).owner_id %>
                       <strong class="mb-1"><%= Account.find(request.user_id).full_name %></strong>
-                      <small class="text-muted "><%= request.status %></small>
                   <% end %>
                 </div>
               </div>
               <div class="col-10 mb-1 small pt-3 justify-content-between">
-                <p>rent duration(week/s): <%= request.rent_duration %> </p>
+                <div class="row">
+                  <div class="col">
+                    <p>rent duration(week/s): <%= request.rent_duration %> </p>
+                  </div>
+                  <div class="col-md-auto">
+                    <% if request.status == "Pending" %>
+                      <p class="text-warning"><%= request.status %></p>
+                    <% elsif request.status == "rejected" %>
+                      <p class="text-danger"><%= request.status %></p>
+                    <% else %>
+                      <p class="text-success"><%= request.status %></p>
+                    <% end %>
+                   </div>
+                </div>
               </div>
             </div>
           </div>
@@ -26,5 +38,5 @@
         </div>
 
         <% end %>
-      </div>
   <% end %>
+  </div>
