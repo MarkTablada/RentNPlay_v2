@@ -1,3 +1,10 @@
+<head>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+</head>
+
 <%= form_with(model: game) do |form| %>
   <% if game.errors.any? %>
     <div style="color: red">
@@ -15,63 +22,91 @@
     <%= form.hidden_field :owner_id %>
   </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
+<section class="vh-100">
+<div class="row d-flex justify-content-center align-items-center cardspacetop">
+	<div class="col col-lg-8 mb-4 mb-lg-0">
+		<div class="card mb-3" style="border-radius: .5rem;">
+			<div class="card-body">
+				<div class="container contact-form">
+							<form method="post">
+								<h3>Edit Game</h3>
+							   <div class="row">
+									<div class="col-md-6">
+									<div class="form-group">
+										<%= form.label :name, style: "display: block" %>
+										<%= form.text_field :name, placeholder: "Name", class:"form-control" %>
+									</div>
+									
+									
+									<div class="form-group">
+										<%= form.label :genre, style: "display: block" %>
+										<%= form.text_field :genre, placeholder: "Genre", class:"form-control"  %>
+									</div>
+									
+									<div class="form-group">
+										<%= form.label :maturity_rating, class:"form" %>
+										<p>
+										<%= form.radio_button :maturity_rating, 'E', :checked => true %> E
+										<%= form.radio_button :maturity_rating, 'E10' %> E10
+										<%= form.radio_button :maturity_rating, 'T' %> T
+										<%= form.radio_button :maturity_rating, 'M17' %> M17
+										<%= form.radio_button :maturity_rating, 'A18' %> A18
+										<%= form.radio_button :maturity_rating, 'RP' %> RP
+										<%= form.radio_button :maturity_rating, 'RP17' %> RP17
+									</div>
+									
+									<div class="form-group">
+										<%= form.label :rent_rate, class:"form" %> (per week):
+										<p>
+										<%= form.number_field :rent_rate, placeholder: "Rent rate per week", class:"form-control" %>
+									</div>
 
-  <div>
-    <%= form.label :release_date, style: "display: block" %>
-    <%= form.date_field :release_date %>
-  </div>
+									<div class="form-group">
+										<%= form.label :max_rent_duration, class:"form" %> (in week/s):
+										<p>
+										<%= form.number_field :max_rent_duration, placeholder: "Max rent duration", class:"form-control" %>
+									</div>
 
-  <div>
-    <%= form.label :genre, style: "display: block" %>
-    <%= form.text_field :genre %>
-  </div>
-
-  <div>
-    <%= form.label :maturity_rating %>
-    <p>
-    <%= form.radio_button :maturity_rating, 'E', :checked => true %> E
-    <%= form.radio_button :maturity_rating, 'E10' %> E10
-    <%= form.radio_button :maturity_rating, 'T' %> T
-    <%= form.radio_button :maturity_rating, 'M17' %> M17
-    <%= form.radio_button :maturity_rating, 'A18' %> A18
-    <%= form.radio_button :maturity_rating, 'RP' %> RP
-    <%= form.radio_button :maturity_rating, 'RP17' %> RP17
-  </div>
-
-  <div>
-    <%= form.label :platform, style: "display: block" %>
-    <%= form.text_field :platform %>
-  </div>
-
-  <div>
-    Rent rate(per week): <p>
-    <%= form.number_field :rent_rate %>
-  </div>
-
-  <div>
-    Max rent duration(in week/s): <p>
-    <%= form.number_field :max_rent_duration %>
-  </div>
-
-  <div>
-  Status
-    <%= form.radio_button :status, 'available', :checked => true %> 
-    <%= form.label :status, 'available', :value => 'available' %>
-    <%= form.radio_button :status, 'unavailable' %>
-    <%= form.label :status, 'unavailable', :value => 'unavailable' %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-
+									<div class="form-group">
+									  Status
+										<%= form.radio_button :status, 'available', :checked => true %> 
+										<%= form.label :status, 'available', :value => 'available' %>
+										<%= form.radio_button :status, 'unavailable' %>
+										<%= form.label :status, 'unavailable', :value => 'unavailable' %>
+									</div>
+									
+									<div class="form-group">
+										<a href="/games"><button type="button" class="btn btn-secondary">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+										<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+										</svg> 
+										Back to Games</button></a>
+										<%= form.submit class:"btn btn-primary" %>
+									</div>
+									
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+											<%= form.label :release_date, style: "display: block" %>
+											<%= form.date_field :release_date, placeholder: "Release date", class:"form-control"  %>
+									</div>
+									<div class="form-group">
+										<%= form.label :platform, style: "display: block" %>
+										<%= form.text_field :platform, placeholder: "Platform", class:"form-control" %>
+									</div>
+									
+									<div class="form-group">
+										<%= form.label :description, style: "display: block" %>
+										<%= form.text_area :description, class:"form-control", placeholder:"Game description", style:"width:100%; height: 150px;" %>
+									</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
 <% end %>
