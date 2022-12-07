@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/logout", to: "accounts#logout"
 
   root "accounts#login"
-
+  
   get "/respond", to: "requests#respond"
 
   post "/accept", to: "requests#accept"
@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get "/link_and_return", to: "receipts#link_and_return"
   post "/link_and_return", to: "receipts#link_and_return"
+  
+  
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
